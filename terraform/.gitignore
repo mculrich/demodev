@@ -1,0 +1,19 @@
+﻿# Ignore local terraform state and providers
+terraform/.terraform/
+terraform.tfstate
+terraform.tfstate.backup
+*.tfplan
+
+# OS / editor
+.vscode/
+*.swp
+
+# Binaries
+*.exe
+*.dll
+
+# Logs
+*.log
+
+# Sensitive files
+*.pem

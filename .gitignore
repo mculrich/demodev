@@ -1,0 +1,20 @@
+﻿# Ignore local terraform state and providers
+terraform/.terraform/
+terraform.tfstate
+terraform.tfstate.backup
+*.tfplan
+
+# OS / editor
+.vscode/
+*.swp
+
+# Binaries
+*.exe
+*.dll
+
+# Logs
+*.log
+
+# Sensitive files
+*.pem
+\n# Local terraform directories at repo root\n.terraform/\nkubectl.exe\n

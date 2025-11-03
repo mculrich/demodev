@@ -1,0 +1,51 @@
+# Self-Service API for Environment Provisioning
+apiVersion: v1
+kind: Service
+metadata:
+  name: environment-provisioner
+  namespace: platform-services
+spec:
+  selector:
+    app: environment-provisioner
+  ports:
+    - port: 80
+      targetPort: 8080
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: environment-provisioner
+  namespace: platform-services
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: environment-provisioner
+  template:
+    metadata:
+      labels:
+        app: environment-provisioner
+    spec:
+      serviceAccountName: environment-provisioner-sa
+      containers:
+      - name: provisioner
+        image: environment-provisioner:latest
+        securityContext:
+          runAsNonRoot: true
+          allowPrivilegeEscalation: false
+        env:
+        - name: AWS_ROLE_ARN
+          value: "arn:aws:iam::ACCOUNT_ID:role/environment-provisioner"
+        - name: CLUSTER_NAME
+          valueFrom:
+            configMapKeyRef:
+              name: cluster-config
+              key: cluster-name
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: environment-provisioner-sa
+  namespace: platform-services
+  annotations:
+    eks.amazonaws.com/role-arn: "arn:aws:iam::ACCOUNT_ID:role/environment-provisioner"
