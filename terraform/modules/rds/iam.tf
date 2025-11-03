@@ -1,6 +1,7 @@
 resource "aws_iam_role" "rds_monitoring" {
-  name = "${var.identifier}-monitoring"
-  
+  count = var.enable_enhanced_monitoring ? 1 : 0
+  name  = "${var.identifier}-monitoring"
+
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
@@ -16,12 +17,14 @@ resource "aws_iam_role" "rds_monitoring" {
 }
 
 resource "aws_iam_role_policy_attachment" "rds_monitoring" {
-  role       = aws_iam_role.rds_monitoring.name
+  count      = var.enable_enhanced_monitoring ? 1 : 0
+  role       = aws_iam_role.rds_monitoring[0].name
   policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonRDSEnhancedMonitoringRole"
 }
 
 # KMS key for RDS Performance Insights
 resource "aws_kms_key" "rds_pi" {
+  count = var.create_rds_pi_kms ? 1 : 0
   description             = "KMS key for RDS Performance Insights ${var.identifier}"
   deletion_window_in_days = 7
   enable_key_rotation     = true
