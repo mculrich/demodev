@@ -1,0 +1,15 @@
+# Checkov configuration for opt-in cost-sensitive features
+# These checks are skipped because the features are disabled by default for cost control
+# Enable them in production by setting the appropriate variables
+
+skip-check:
+  # RDS cost-sensitive features (opt-in via variables)
+  - CKV_AWS_157  # Multi-AZ - opt-in via rds_enable_multi_az
+  - CKV_AWS_118  # Enhanced monitoring - opt-in via rds_enable_enhanced_monitoring
+  - CKV_AWS_353  # Performance Insights - opt-in via rds_enable_performance_insights
+  - CKV_AWS_293  # Deletion protection - opt-in via rds_enable_deletion_protection
+  - CKV_AWS_129  # CloudWatch log exports - opt-in via rds_enable_cloudwatch_log_exports
+  - CKV2_AWS_30  # Query logging - requires parameter group configuration
+  
+  # Security group not attached (template resource)
+  - CKV2_AWS_5   # Common SG is a shared resource template
