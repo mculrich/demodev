@@ -100,6 +100,42 @@ variable "rds_allocated_storage" {
   default     = 20
 }
 
+variable "rds_enable_multi_az" {
+  description = "Root toggle: enable multi-AZ for RDS (opt-in, default false)"
+  type        = bool
+  default     = false
+}
+
+variable "rds_enable_performance_insights" {
+  description = "Root toggle: enable Performance Insights for RDS (opt-in, default false)"
+  type        = bool
+  default     = false
+}
+
+variable "rds_create_pi_kms" {
+  description = "Root toggle: create KMS key for RDS Performance Insights (opt-in, default false)"
+  type        = bool
+  default     = false
+}
+
+variable "rds_enable_enhanced_monitoring" {
+  description = "Root toggle: enable enhanced monitoring for RDS (opt-in, default false)"
+  type        = bool
+  default     = false
+}
+
+variable "rds_enable_deletion_protection" {
+  description = "Root toggle: enable deletion protection for RDS (opt-in, default false)"
+  type        = bool
+  default     = false
+}
+
+variable "rds_enable_cloudwatch_log_exports" {
+  description = "Root toggle: enable CloudWatch log exports for RDS (opt-in, default false)"
+  type        = bool
+  default     = false
+}
+
 variable "allowed_regions" {
   description = "Allowed AWS regions for organization policy"
   type        = list(string)
