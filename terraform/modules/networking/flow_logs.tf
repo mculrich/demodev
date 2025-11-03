@@ -72,7 +72,7 @@ resource "aws_kms_key" "flow_logs" {
         Sid    = "Allow CloudWatch Logs to use the key"
         Effect = "Allow"
         Principal = {
-          Service = "logs.${var.aws_region}.amazonaws.com"
+          Service = "logs.${data.aws_region.current.name}.amazonaws.com"
         }
         Action = [
           "kms:GenerateDataKey*",
