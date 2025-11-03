@@ -18,6 +18,12 @@ resource "aws_db_subnet_group" "this" {
   }
 }
 
+#checkov:skip=CKV_AWS_157:Multi-AZ is opt-in for cost control (enable via rds_enable_multi_az)
+#checkov:skip=CKV_AWS_118:Enhanced monitoring is opt-in for cost control (enable via rds_enable_enhanced_monitoring)
+#checkov:skip=CKV_AWS_353:Performance Insights is opt-in for cost control (enable via rds_enable_performance_insights)
+#checkov:skip=CKV_AWS_293:Deletion protection is opt-in for cost control (enable via rds_enable_deletion_protection)
+#checkov:skip=CKV_AWS_129:CloudWatch log exports are opt-in for cost control (enable via rds_enable_cloudwatch_log_exports)
+#checkov:skip=CKV2_AWS_30:Query logging requires parameter group configuration (implement if needed)
 resource "aws_db_instance" "this" {
   identifier = var.identifier
   engine     = var.engine

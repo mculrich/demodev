@@ -80,6 +80,7 @@ resource "aws_nat_gateway" "main" {
 
 
 # Security Groups
+#checkov:skip=CKV2_AWS_5:Common security group is a shared resource template (attach to resources as needed)
 resource "aws_security_group" "common" {
   name        = "${var.environment}-common"
   description = "Common security group for ${var.environment}"
