@@ -78,13 +78,13 @@ module "rds" {
   vpc_id      = try(module.vpc[0].vpc_id, "")
   subnet_ids  = try(module.vpc[0].private_subnet_ids, [])
   environment = var.environment
-  
+
   # Cost-sensitive feature flags (opt-in)
-  enable_multi_az               = var.rds_enable_multi_az
-  enable_performance_insights   = var.rds_enable_performance_insights
-  create_rds_pi_kms             = var.rds_create_pi_kms
-  enable_enhanced_monitoring    = var.rds_enable_enhanced_monitoring
-  enable_deletion_protection    = var.rds_enable_deletion_protection
+  enable_multi_az                = var.rds_enable_multi_az
+  enable_performance_insights    = var.rds_enable_performance_insights
+  create_rds_pi_kms              = var.rds_create_pi_kms
+  enable_enhanced_monitoring     = var.rds_enable_enhanced_monitoring
+  enable_deletion_protection     = var.rds_enable_deletion_protection
   enable_cloudwatch_logs_exports = var.rds_enable_cloudwatch_log_exports
 }
 
